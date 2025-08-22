@@ -1,11 +1,20 @@
 @props(['type' => session('success') ? 'success' : (session()->has('error') ? 'error' : 'info'), 'message' => session('success') ?? (session('error') ?? '')])
 
 @if ($message || $errors->any())
-    <div
+    <div x-data="{
+        isShow: true,
+        init() {
+            setTimeout(() => this.isShow = false, 500)
+        }
+    }" x-show="isShow"
         class="p-4 mb-4 rounded-md text-sm
-                @if ($type === 'success') bg-green-100 text-green-800
-                @elseif($type === 'error') bg-red-100 text-red-800
-                @else bg-gray-100 text-gray-800 @endif">
+                @if ($type === 'success')
+bg-green-100 text-green-800
+@elseif($type === 'error')
+bg-red-100 text-red-800
+@else
+bg-gray-100 text-gray-800
+@endif">
         @if ($message)
             {{ $message }}
         @endif
