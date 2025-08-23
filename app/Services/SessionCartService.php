@@ -36,7 +36,7 @@ class SessionCartService implements CartServiceInterface
 
         // 2. Mapping
         $cart = $collection->map(function(CartItemData $i) use($item, &$updated) {
-            if ($i->sku == $item) {
+            if ($i->sku == $item->sku) {
                 $updated = true;
 
                 return $item;
