@@ -4,7 +4,7 @@
     <div x-data="{
         isShow: true,
         init() {
-            setTimeout(() => this.isShow = false, 500)
+            setTimeout(() => this.isShow = false, 1500)
         }
     }" x-show="isShow"
         class="p-4 mb-4 rounded-md text-sm
