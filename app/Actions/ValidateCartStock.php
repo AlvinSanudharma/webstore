@@ -23,6 +23,8 @@ class ValidateCartStock
             /** @var ProductData $product */
             $product = $item->product();
 
+           
+
             if (!$product || $product->stock < $item->quantity) {
                 $insufficient[] = [
                     'sku' => $product->sku,
@@ -31,6 +33,12 @@ class ValidateCartStock
                     'product' => $product->stock ?? 0
                 ];
             }
+        }
+
+        if ($this->cart->all()->items->count() == 0) {
+            throw ValidationException::withMessages([
+                'cart' => "You don't have any product",
+            ]);
         }
 
         if ($insufficient) {
