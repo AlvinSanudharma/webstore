@@ -4,10 +4,12 @@ namespace App\Livewire;
 
 use App\Contract\CartServiceInterface;
 use App\Data\CartData;
+use App\Data\RegionData;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Number;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
+use Spatie\LaravelData\DataCollection;
 
 class Checkout extends Component
 {
@@ -16,6 +18,12 @@ class Checkout extends Component
         'email' => null,
         'phone' => null,
         'address_line' => null,
+        'destination_region_code' => null
+    ];
+
+    public array $region_selector = [
+        'keyword' => null,
+        'region_selected' => null
     ];
 
     public array $summaries = [
@@ -43,8 +51,10 @@ class Checkout extends Component
             'data.email' => ['required', 'email', 'max:255'],
             'data.phone' => ['required', 'min:7', 'max:13'],
             'data.address_line' => ['required', 'min:10', 'max:255'],
+            'data.destination_region_code' => ['required']
         ];
     }
+    
 
     public function calculateTotal()
     {
@@ -69,6 +79,52 @@ class Checkout extends Component
 
         return $cart->all();
     }
+
+    #[Computed]
+    public function regions(): DataCollection
+    {
+        $data = [
+            [
+                'code' => '001',
+                'province' => 'Jawa Barat',
+                'city' => 'Bandung',
+                'district' => 'District',
+                'sub_district' => 'Sub District',
+                'postal_code' => '0000'
+            ],
+            [
+                'code' => '002',
+                'province' => 'Jawa Barat 2',
+                'city' => 'Bintaro',
+                'district' => 'District 2',
+                'sub_district' => 'Sub District 2',
+                'postal_code' => '0001'
+            ],
+        ];
+
+        if (!data_get($this->region_selector, 'keyword')) {
+            $data = [];
+        }
+
+        return new DataCollection(RegionData::class, $data);
+    }
+
+    #[Computed]
+    public function region(): ?RegionData
+    {
+        $region_selected = data_get($this->region_selector, 'region_selected');
+
+        if ($region_selected) {
+            return null;
+        }
+            return $this->regions->toCollection()->first(fn (RegionData $region) => $region->code == $region_selected);
+    }
+
+    public function updatedRegionSelectorRegionSelected($value)
+    {
+        data_set($this->data, 'destination_region_code', $value);
+    }
+
 
     public function placeAnOrder()
     {
