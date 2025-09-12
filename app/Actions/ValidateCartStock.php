@@ -35,12 +35,6 @@ class ValidateCartStock
             }
         }
 
-        if ($this->cart->all()->items->count() == 0) {
-            throw ValidationException::withMessages([
-                'cart' => "You don't have any product",
-            ]);
-        }
-
         if ($insufficient) {
             throw ValidationException::withMessages([
                 'cart' => 'Some product is insufficient stock',

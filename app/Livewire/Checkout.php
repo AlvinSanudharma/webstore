@@ -6,6 +6,7 @@ use App\Contract\CartServiceInterface;
 use App\Data\CartData;
 use App\Data\RegionData;
 use App\Data\ShippingData;
+use App\Rules\ValidPaymentMethodHash;
 use App\Rules\ValidShippingHash;
 use App\Services\PaymentMethodQueryService;
 use App\Services\RegionQueryService;
@@ -57,6 +58,10 @@ class Checkout extends Component
             return redirect()->route('cart');
         }
 
+        if ($this->cart->total_quantity < 0) {
+            return redirect()->route('cart');
+        }
+
         $this->calculateTotal();
     }
 
@@ -69,7 +74,7 @@ class Checkout extends Component
             'data.address_line' => ['required', 'min:10', 'max:255'],
             'data.destination_region_code' => ['required', 'exists:regions,code'],
             'data.shipping_hash' => ['required', new ValidShippingHash()],
-            'data.payment_method_hash' => ['required'],
+            'data.payment_method_hash' => ['required', new ValidPaymentMethodHash()],
         ];
     }
     
