@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Driver\Shipping;
+namespace App\Drivers\Shipping;
 
 use App\Contract\ShippingDriverInterface;
 use App\Data\CartData;

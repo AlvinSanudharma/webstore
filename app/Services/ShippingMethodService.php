@@ -9,7 +9,7 @@ use App\Data\CartData;
 use App\Data\RegionData;
 use App\Data\ShippingData;
 use App\Data\ShippingServiceData;
-use App\Driver\Shipping\OfflineShippingDriver;
+use App\Drivers\Shipping\OfflineShippingDriver;
 use Illuminate\Support\Facades\Cache;
 use Spatie\LaravelData\DataCollection;
 
