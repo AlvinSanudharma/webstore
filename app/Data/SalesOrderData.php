@@ -2,6 +2,7 @@
 
 namespace App\Data;
 
+use App\Models\SalesOrder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Number;
 use Spatie\LaravelData\Attributes\Computed;
@@ -53,5 +54,10 @@ class SalesOrderData extends Data
         $this->total_formatted = Number::currency($total);
         $this->created_at_formatted = $created_at->translatedFormat('d F Y, H:i');
         $this->due_date_at_formatted = $due_date_at->translatedFormat('d F Y, H:i');
+    }
+
+    public static function fromModel(SalesOrder $sales_order): self
+    {
+        return new self();
     }
 }
