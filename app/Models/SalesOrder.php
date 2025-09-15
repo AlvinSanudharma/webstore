@@ -13,6 +13,7 @@ class SalesOrder extends Model
     {
         return [
             'payment_payload' => 'json',
+            'due_date_at' => 'datetime'
         ];
     }
 

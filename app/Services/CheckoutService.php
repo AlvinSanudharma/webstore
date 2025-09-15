@@ -53,6 +53,7 @@ class CheckoutService {
                 'sub_total' => $checkout_data->sub_total,
                 'shipping_total' => $checkout_data->shipping_cost,
                 'total' => $checkout_data->grand_total,
+                'due_date_at' => Carbon::now()->addHours(24)
             ]);
 
             /** @var CartItemData $item */
@@ -85,6 +86,6 @@ class CheckoutService {
             return $sales_order;
         });
 
-        return SalesOrderData::fromModel();
+        return SalesOrderData::fromModel($sales_order);
     }
 }
