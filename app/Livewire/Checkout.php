@@ -80,6 +80,19 @@ class Checkout extends Component
             'data.payment_method_hash' => ['required', new ValidPaymentMethodHash()],
         ];
     }
+
+    protected function validationAttributes() 
+    {
+        return [
+            'data.full_name' => 'Name',
+             'data.email' => 'Email',
+            'data.phone' => 'Phone',
+            'data.address_line' => 'Address',
+            'data.destination_region_code' => 'Region',
+            'data.shipping_hash' => 'Shipping Method',
+            'data.payment_method_hash' => 'Payment Method',
+        ];
+    }
     
 
     public function calculateTotal()
