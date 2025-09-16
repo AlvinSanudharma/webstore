@@ -105,10 +105,10 @@
                 <label for="af-shipping-method" class="inline-block text-sm font-medium dark:text-white">
                     Shipping Method
                 </label>
-                {{-- @error('data.shipping_hash')
+                @error('data.shipping_hash')
                     <p class="mt-2 text-xs text-red-600" id="hs-validation-name-error-helper">
                         {{ $message }}</p>
-                @enderror --}}
+                @enderror
                 <div class="mt-2 space-y-3">
                     <div class="w-full text-center relative flex justify-center">
                         <div wire:loading wire:target="region_selector.region_selected"
