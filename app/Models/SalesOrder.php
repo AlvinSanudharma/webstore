@@ -18,7 +18,6 @@ class SalesOrder extends Model
         return [
             'status' => SalesOrderState::class,
             'payment_payload' => 'json',
-            'due_date_at' => 'datetime',
         ];
     }
 
