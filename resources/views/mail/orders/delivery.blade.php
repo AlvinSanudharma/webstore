@@ -1,5 +1,6 @@
+{{-- blade-formatter-disable --}}
 @component('mail::message')
-# Pesanan Anda Telah Dikirim, {{ $sales_order->customer->full_name }} 🚚
+# Pesanan Anda Telah Dikirim, {{ $sales_order->customer_data->full_name }} 🚚
 
 Pesanan Anda dengan nomor **#{{ $sales_order->trx_id }}** telah dikirim dan sedang dalam perjalanan ke alamat tujuan.
 
@@ -50,3 +51,4 @@ Terima kasih telah berbelanja bersama kami 🙏
 Semoga pesanan Anda segera sampai dengan selamat.
 
 @endcomponent
+{{-- blade-formatter-disable --}}

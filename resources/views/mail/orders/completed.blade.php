@@ -1,5 +1,6 @@
+{{-- blade-formatter-disable --}}
 @component('mail::message')
-# Pesanan Selesai, {{ $sales_order->customer->full_name }} ✅
+# Pesanan Selesai, {{ $sales_order->customer_data->full_name }} ✅
 
 Pesanan Anda dengan nomor **#{{ $sales_order->trx_id }}** telah berhasil diselesaikan dan telah kami kirimkan ke alamat tujuan.
 
@@ -40,3 +41,4 @@ Terima kasih telah berbelanja bersama kami 🙏
 Semoga produk kami bermanfaat untuk Anda. Sampai jumpa di pesanan berikutnya!
 
 @endcomponent
+{{-- blade-formatter-disable --}}

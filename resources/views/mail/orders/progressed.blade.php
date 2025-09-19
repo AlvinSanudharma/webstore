@@ -1,5 +1,6 @@
+{{-- blade-formatter-disable --}}
 @component('mail::message')
-# Pesanan Anda Sedang Disiapkan, {{ $sales_order->customer->full_name }} 📦
+# Pesanan Anda Sedang Disiapkan, {{ $sales_order->customer_data->full_name }} 📦
 
 Pesanan Anda dengan nomor **#{{ $sales_order->trx_id }}** sedang kami siapkan dan akan segera dikirimkan ke alamat tujuan.
 
@@ -40,3 +41,4 @@ Terima kasih atas kepercayaan Anda 🙏
 Kami akan segera menginformasikan jika pesanan sudah dikirimkan.
 
 @endcomponent
+{{-- blade-formatter-disable --}}

@@ -1,5 +1,6 @@
+{{-- blade-formatter-disable --}}
 @component('mail::message')
-# Pesanan Dibatalkan, {{ $sales_order->customer->full_name }} 😔
+# Pesanan Dibatalkan, {{ $sales_order->customer_data->full_name }} 😔
 
 Pesanan Anda dengan nomor **#{{ $sales_order->trx_id }}** telah dibatalkan dan tidak akan diproses lebih lanjut.
 
@@ -42,3 +43,4 @@ Terima kasih telah mempercayai kami 🙏
 Kami berharap dapat membantu Anda di kesempatan berikutnya.
 
 @endcomponent
+{{-- blade-formatter-disable --}}
