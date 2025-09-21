@@ -32,6 +32,7 @@ class SalesOrderCreated
      */
     public function broadcastOn(): array
     {
+        // TODO: Install Laravel Reverb!
         return [
             new PrivateChannel('channel-name'),
         ];
