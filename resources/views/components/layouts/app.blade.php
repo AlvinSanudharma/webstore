@@ -21,6 +21,7 @@
     <x-alert />
     {{ $slot }}
     <x-footer />
+    <x-toast />
 </body>
 
 </html>
