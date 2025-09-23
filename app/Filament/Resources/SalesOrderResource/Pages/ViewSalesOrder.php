@@ -2,12 +2,16 @@
 
 namespace App\Filament\Resources\SalesOrderResource\Pages;
 
+use App\Data\SalesOrderData;
 use App\Filament\Resources\SalesOrderResource;
+use App\Services\SalesOrderService;
+use App\States\SalesOrder\Completed;
 use App\States\SalesOrder\Pending;
 use App\States\SalesOrder\Progress;
 use Filament\Actions;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Radio;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Pages\ViewRecord;
 
 class ViewSalesOrder extends ViewRecord
@@ -41,6 +45,31 @@ class ViewSalesOrder extends ViewRecord
                 })
                 ->action(function(array $data) {
                     $this->record->status->transitionTo(data_get($data, 'status'));
+                }),
+            Action::make('Input Resi Pengiriman')
+                ->icon('heroicon-o-truck')
+                ->modalWidth('sm')
+                ->modalHeading('Input Nomor Resi')
+                ->visible(function() {
+                    $status = get_class($this->record->status);
+
+                    $valid_statuses = [
+                        Progress::class,
+                        Completed::class
+                    ];
+
+                    return in_array($status, $valid_statuses) && empty($this->record->shipping_receipt_number);
+                })
+                ->form([
+                    TextInput::make('shipping_receipt_number')
+                        ->label('Nomor Resi')
+                        ->required()
+                ])
+                ->action(function(array $data) {
+                    app(SalesOrderService::class)->updateShippingReceipt(
+                        SalesOrderData::fromModel($this->record),
+                        data_get($data, 'shipping_receipt_number')
+                    );
                 })
         ];
     }
