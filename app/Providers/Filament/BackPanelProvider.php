@@ -54,7 +54,9 @@ class BackPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ])->plugin(
+            ])->plugins(
+                [
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
                 BreezyCore::make()
                      ->myProfile(
                         shouldRegisterUserMenu: true, 
@@ -64,6 +66,7 @@ class BackPanelProvider extends PanelProvider
                         hasAvatars: false, 
                         slug: 'my-profile'
                     )
+                ]
             )->darkMode(false);
     }
 }
