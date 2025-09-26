@@ -22,7 +22,7 @@ class RegionData extends Data
         public string|null $postal_code,
         public string $country = 'indonesia',
     ) {
-        $this->label = "$sub_district, $district, $city, $province" . ($postal_code ? ",$postal_code" : "");
+        $this->label = "$sub_district, $district, $city, $province" . ($postal_code ? ", $postal_code" : "");
     }
 
     public static function fromModel(Region $region): self
