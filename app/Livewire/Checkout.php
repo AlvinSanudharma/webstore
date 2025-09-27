@@ -111,19 +111,13 @@ class Checkout extends Component
         data_set($this->summaries, 'grand_total_formatted',  Number::currency($grand_total));
     }
 
-    #[Computed]
-    public function cart(): CartData
+    public function getCartProperty(CartServiceInterface $cart): CartData
     {   
-        $cart = app(CartServiceInterface::class);
-
         return $cart->all();
     }
 
-    #[Computed]
-    public function regions(): DataCollection
+    public function getRegionsProperty(RegionQueryService $query_service): DataCollection
     {
-        $query_service = app(RegionQueryService::class);
-
         if (!data_get($this->region_selector, 'keyword')) {
             $data = [];
 
@@ -133,11 +127,8 @@ class Checkout extends Component
         return $query_service->searchRegionByName(data_get($this->region_selector, 'keyword'));
     }
 
-    #[Computed]
-    public function region(): ?RegionData
+    public function getRegionProperty(RegionQueryService $query_service): ?RegionData
     {
-        $query_service = app(RegionQueryService::class);
-
         $region_selected = data_get($this->region_selector, 'region_selected');
 
         if (!$region_selected) {

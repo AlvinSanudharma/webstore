@@ -12,7 +12,7 @@ use Spatie\LaravelData\DataCollection;
 
 class CartData extends Data
 {
-    #[Computed()]
+    #[Computed]
     public float $total;
 
     public int $total_weight;

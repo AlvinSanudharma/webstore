@@ -23,11 +23,8 @@ class Cart extends Component
         $this->total = $this->sub_total;
     }
 
-    #[Computed]
-    public function items(): Collection
+    public function getItemsProperty(CartServiceInterface $cart): Collection
     {
-        $cart = app(CartServiceInterface::class);
-
         return $cart->all()->items->toCollection();
     }
 
@@ -38,6 +35,8 @@ class Cart extends Component
 
     public function render()
     {
-        return view('livewire.cart',);
+        return view('livewire.cart', [
+            'items' => $this->items
+        ]);
     }
 }

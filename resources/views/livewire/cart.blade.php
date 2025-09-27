@@ -4,7 +4,7 @@
             <div class="md:col-span-7">
                 <h1 class="mb-5 text-2xl font-light">Shopping Bag</h1>
                 <div class="grid gap-5">
-                    @forelse ($this->items as $item)
+                    @forelse ($items as $item)
                         <div class="flex items-center gap-5 pb-5 border-b border-gray-200">
                             <div class="relative w-40 h-40 overflow-hidden rounded-xl">
                                 <img class="object-coversize-full" src="{{ $item->product()->cover_url }}"
