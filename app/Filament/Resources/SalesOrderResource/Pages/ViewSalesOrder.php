@@ -12,6 +12,7 @@ use Filament\Actions;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ViewRecord;
 
 class ViewSalesOrder extends ViewRecord
@@ -45,6 +46,12 @@ class ViewSalesOrder extends ViewRecord
                 })
                 ->action(function(array $data) {
                     $this->record->status->transitionTo(data_get($data, 'status'));
+
+                    Notification::make()
+                        ->title('Berhasil ubah status')
+                        ->success()
+                        ->body('Status pesanan berhasil diubah')
+                        ->send();
                 }),
             Action::make('Input Resi Pengiriman')
                 ->icon('heroicon-o-truck')
